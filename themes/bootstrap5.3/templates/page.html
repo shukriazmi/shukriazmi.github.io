@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block html_lang %}{{ page.lang }}{% endblock %}
+
+{% block title %}{{ SITENAME|striptags }} - {{ page.title|striptags }}{%endblock%}
+
+{% block head %}
+  {{ super() }}
+
+  {% import 'translations.html' as translations with context %}
+  {% if translations.entry_hreflang(page) %}
+    {{ translations.entry_hreflang(page) }}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<article class="p-4">
+  <header class="p-2">
+    <h2>Hi I'm shukri azmi</h2>
+  </header>
+    {% import 'translations.html' as translations with context %}
+    {{ translations.translations_for(page) }}
+  <main class="p-2"> {{ page.content }} </main>
+
+    {% if page.modified %}
+      <footer class="p-2">
+        <p>
+        Last updated: {{ page.locale_modified }}
+        </p>
+      </footer>
+    {% endif %}
+</article>
+{% endblock %}
