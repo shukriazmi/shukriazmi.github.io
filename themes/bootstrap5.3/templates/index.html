@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+{% block content_title %}
+<h2 class="text-success py-2">Hello World &#128516</h2>
+{% endblock %}
+{% for article in articles_page.object_list %}
+    <article class="card m-2 border-success">
+            <header class="card-header text-center">
+                <h2>
+                    <a href="{{ SITEURL }}/{{ article.url }}"
+                       rel="bookmark"
+                            class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0
+                              link-underline-opacity-75-hover"
+                       title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
+                </h2>
+            </header>
+            <section class="card-body">{{ article.summary }}</section>
+            <footer class="card-footer text-body-secondary">
+                <p>Published: <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time></p>
+                <address>By
+                {% for author in article.authors %}
+                    <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                {% endfor %}
+                </address>
+            </footer>
+    </article>
+{% endfor %}
+
+{% if articles_page.has_other_pages() %}
+    {% include 'pagination.html' %}
+{% endif %}
+
+{% endblock content %}
