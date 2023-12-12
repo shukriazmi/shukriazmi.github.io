@@ -19,8 +19,7 @@ LOAD_CONTENT_CACHE = False
 JINJA_GLOBALS = {'article_url': []}
 JINJA_ENVIRONMENT = {'trim_blocks': True, 'lstrip_blocks': True, 'extensions': ["jinja2.ext.do", ]}
 
-# this is a destructive setting and should be handled with extreme care.
-DELETE_OUTPUT_DIRECTORY = False
+MENUITEMS = (('Archives', '/archives.html'), )
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
