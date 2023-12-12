@@ -1,117 +1,102 @@
 {% extends "base.html" %}
 {% block html_lang %}{{ article.lang }}{% endblock %}
 
-{% block title %}{{ SITENAME|striptags }} - {{ article.title|striptags  }}{% endblock %}
+{% block title %}{{ SITENAME|striptags }} - {{ article.title|striptags }}{% endblock %}
 
 {% block head %}
-  {{ super() }}
+    {{ super() }}
 
-  {% import 'translations.html' as translations with context %}
-  {% if translations.entry_hreflang(article) %}
-    {{ translations.entry_hreflang(article) }}
-  {% endif %}
+    {% import 'translations.html' as translations with context %}
+    {% if translations.entry_hreflang(article) %}
+        {{ translations.entry_hreflang(article) }}
+    {% endif %}
 
-  {% if article.description %}
-    <meta name="description" content="{{article.description}}" />
-  {% endif %}
+    {% if article.description %}
+        <meta name="description" content="{{ article.description }}"/>
+    {% endif %}
 
-  {% for tag in article.tags %}
-    <meta name="tags" content="{{tag}}" />
-  {% endfor %}
+    {% for tag in article.tags %}
+        <meta name="tags" content="{{ tag }}"/>
+    {% endfor %}
 
 {% endblock %}
 
 {% block content %}
 
-{% set articles_url = [] %}
-{% for art in articles %}
-    {% do articles_url.append(art.url) %}
-{% endfor %}
+    {% set articles_url = [] %}
 
-{% if articles_url|length > 0 %}
-    {% set index = articles_url.index(article.url) %}
-{% endif %}
-<!--<div class="card text-center w-25 mt-3 float-end">-->
-<!--    <div class="card-header">-->
-<!--        Articles-->
-<!--    </div>-->
-<!--    <div class="card-body">-->
-<!--        {% for art in articles %}-->
-<!--            <nav class="nav flex-column nav-pills">-->
-<!--                <a href="{{ SITEURL }}/{{ art.url }}"-->
-<!--                   type="button"-->
-<!--                        {% if art.url==article.url %}-->
-<!--                                    class="nav-link active"  aria-current="page"-->
-<!--                               {% else %}-->
-<!--                                    class="nav-link"-->
-<!--                               {% endif %}>{{ art.title }}</a>-->
-<!--            </nav>-->
-<!--        {% endfor %}-->
+    {% for art in articles %}
+        {% do articles_url.append(art.url) %}
+    {% endfor %}
 
-<!--    </div>-->
-<!--    <div class="card-footer text-body-secondary">-->
-<!--        Enjoy reading :)-->
-<!--    </div>-->
-<!--</div>-->
+    {% if articles_url|length > 0 %}
+        {% set index = articles_url.index(article.url) %}
+    {% endif %}
 
-<article class="card mt-2">
-  <header class="card-header text-center">
-    <h2>
-      <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
-         class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0
+    <article class="card mt-2">
+        <header class="card-header text-center">
+            <h2>
+                <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+                        class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0
                               link-underline-opacity-75-hover"
-         title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
- {% import 'translations.html' as translations with context %}
- {{ translations.translations_for(article) }}
-  </header>
-    <section class="card-body">
-         {{ article.content }}
-          {% if articles_url|length > 0 %}
-          <div class="row gap-2 justify-content-center p-2">
-                {% if index == 0 %}
-                    <a href="#" type="button" class="col-auto btn btn-primary btn-sm disabled">Finish</a>
-                {% else %}
-                    <a href="{{ SITEURL }}/{{ articles_url[index - 1] }}" type="button" class="col-auto btn btn-primary btn-sm">Next</a>
-                {% endif %}
+                        title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2>
+            {% import 'translations.html' as translations with context %}
+            {{ translations.translations_for(article) }}
+        </header>
+        <section class="card-body">
+            {{ article.content }}
+            {% if articles_url|length > 0 %}
+                <div class="row gap-2 justify-content-center p-2">
+                    {% if index == 0 %}
+                        <a href="#" type="button" class="col-auto btn btn-primary btn-sm disabled">Finish</a>
+                    {% else %}
+                        <a href="{{ SITEURL }}/{{ articles_url[index - 1] }}" type="button"
+                                class="col-auto btn btn-primary btn-sm">Next</a>
+                    {% endif %}
 
-                {% if index == (articles_url|length - 1) %}
-                    <a href="#" type="button" class="col-auto btn btn-primary btn-sm disabled">Start</a>
-                {% else %}
-                    <a href="{{ SITEURL }}/{{ articles_url[index + 1] }}" type="button" class="col-auto btn btn-primary btn-sm">Previous</a>
-                {% endif %}
-          </div>
-      {% endif %}
-    </section>
+                    {% if index == (articles_url|length - 1) %}
+                        <a href="#" type="button" class="col-auto btn btn-primary btn-sm disabled">Start</a>
+                    {% else %}
+                        <a href="{{ SITEURL }}/{{ articles_url[index + 1] }}" type="button"
+                                class="col-auto btn btn-primary btn-sm">Previous</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </section>
 
-  <footer class="card-footer text-body-secondary">
-    <p>Published: <time datetime="{{ article.date.isoformat() }}">
-      {{ article.locale_date }}
-    </time></p>
-    {% if article.modified %}
-    <p>Last updated: <time datetime="{{ article.modified.isoformat() }}">
-      {{ article.locale_modified }}
-    </time></p>
-    {% endif %}
-    {% if article.authors %}
-    <address>
-      By {% for author in article.authors %}
-          <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-        {% endfor %}
-    </address>
-    {% endif %}
-    {% if article.category %}
-    <p>
-        Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
-    </p>
-    {% endif %}
-    {% if article.tags %}
-    <p>
-        Tags:
-        {% for tag in article.tags %}
-            <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
-        {% endfor %}
-    </p>
-    {% endif %}
-  </footer>
-  </article>
+        <footer class="card-footer text-body-secondary">
+            <p>Published:
+                <time datetime="{{ article.date.isoformat() }}">
+                    {{ article.locale_date }}
+                </time>
+            </p>
+            {% if article.modified %}
+                <p>Last updated:
+                    <time datetime="{{ article.modified.isoformat() }}">
+                        {{ article.locale_modified }}
+                    </time>
+                </p>
+            {% endif %}
+            {% if article.authors %}
+                <address>
+                    By {% for author in article.authors %}
+                    <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                {% endfor %}
+                </address>
+            {% endif %}
+            {% if article.category %}
+                <p>
+                    Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+                </p>
+            {% endif %}
+            {% if article.tags %}
+                <p>
+                    Tags:
+                    {% for tag in article.tags %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </footer>
+    </article>
 {% endblock %}
