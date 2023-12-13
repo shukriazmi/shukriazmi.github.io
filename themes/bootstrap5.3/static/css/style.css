@@ -1,0 +1,73 @@
+div #about-body {
+    border-radius: 5px;
+    position: relative;
+    animation-name: about-keyframes;
+    animation-duration: 4s;
+}
+
+@keyframes about-keyframes {
+    0% {
+        background-color: #198754;
+        left: 0;
+        top: 0;
+        transform: rotate(60deg);
+    }
+    50% {
+        background-color: #0d6efd;
+        left: 5rem;
+        top: 0;
+        transform: rotate(-60deg);
+    }
+    100% {
+        background-color: #198754;
+        left: 0;
+        top: 0;
+    }
+}
+
+div #index-title {
+    z-index: 1;
+    border-radius: 5px;
+    position: relative;
+    animation-name: index-keyframes;
+    animation-duration: 4s;
+}
+
+@keyframes index-keyframes {
+    0% {
+        left: 0;
+        top: 0;
+        transform: rotate(60deg);
+    }
+    50% {
+        left: 80%;
+        top: 0;
+        transform: rotate(-60deg);
+    }
+    100% {
+        left: 0;
+        top: 0;
+    }
+}
+
+div #archives-list {
+    position: relative;
+    animation-name: archives-keyframes;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+}
+
+@keyframes archives-keyframes {
+    0% {
+        left: 0;
+        opacity: 0;
+    }
+    50% {
+        left: 0;
+        opacity: 50%;
+    }
+    100% {
+        left: 0;
+    }
+}

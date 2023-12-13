@@ -1,4 +1,4 @@
-AUTHOR = 'shukri'
+AUTHOR = 'shukri azmi'
 SITENAME = 'Buku Catatan'
 SITEURL = ""
 
@@ -8,18 +8,18 @@ ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
 ARTICLE_URL = '{date:%Y}/{slug}.html'
 
 TIMEZONE = 'Asia/Kuala_Lumpur'
-
 DEFAULT_LANG = 'en'
-
-DISPLAY_CATEGORIES_ON_MENU = False
 
 THEME = "themes/bootstrap5.3"
 STYLESHEET_URL = f"{SITEURL}/theme/css/style.css"
+MENUITEMS = (('Archives', '/archives.html'), ('About', '/about.html'), )
+DISPLAY_CATEGORIES_ON_MENU = False
 LOAD_CONTENT_CACHE = False
-JINJA_GLOBALS = {'article_url': []}
-JINJA_ENVIRONMENT = {'trim_blocks': True, 'lstrip_blocks': True, 'extensions': ["jinja2.ext.do", ]}
+DEFAULT_PAGINATION = 2
 
-MENUITEMS = (('Archives', '/archives.html'), )
+# custom page generated with a jinja2 template
+TEMPLATE_PAGES = {"about.html": "about.html"}
+JINJA_ENVIRONMENT = {'extensions': ["jinja2.ext.do", ]}
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -30,19 +30,18 @@ AUTHOR_FEED_RSS = None
 
 # Blogroll
 LINKS = (
-    ("Pelican", "https://getpelican.com/"),
-    ("Python.org", "https://www.python.org/"),
+    ("Python", "https://www.python.org/"),
     ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-    ("You can modify those links in your config file", "#"),
+    ("Bootstrap", "https://getbootstrap.com/")
 )
 
 # Social widget
 SOCIAL = (
-    ("You can add links in your config file", "#"),
-    ("Another social link", "#"),
-)
+    ("github", "https://github.com/shukriazmi"),
+    ("linkedin", "https://www.linkedin.com/in/shukri-azmi/"),
+    ("envelope", "mailto:shukriazmi7@gmail.com"),
 
-DEFAULT_PAGINATION = 7
+)
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True

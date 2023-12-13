@@ -1,17 +1,46 @@
 {% if DEFAULT_PAGINATION %}
-{% set first_page = articles_paginator.page(1) %}
-{% set last_page = articles_paginator.page(articles_paginator.num_pages) %}
-<nav>
-  <ul>
-    {% if articles_page.has_previous() %}
-        <li><a href="{{ SITEURL }}/{{ first_page.url }}">&Lang;</a></li>
-        <li><a href="{{ SITEURL }}/{{ articles_previous_page.url }}">&lang;</a></li>
-    {% endif %}
-    <li>Page {{ articles_page.number }} / {{ articles_paginator.num_pages }}</li>
-    {% if articles_page.has_next() %}
-        <li><a href="{{ SITEURL }}/{{ articles_next_page.url }}">&rang;</a></li>
-        <li><a href="{{ SITEURL }}/{{ last_page.url }}">&Rang;</a></li>
-    {% endif %}
-  </ul>
-</nav>
+    {% set first_page = articles_paginator.page(1) %}
+    {% set last_page = articles_paginator.page(articles_paginator.num_pages) %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if articles_page.has_previous() %}
+                <li class="page-item">
+                    <a href="{{ SITEURL }}/{{ articles_previous_page.url }}" class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a href="#" class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for i  in range(articles_paginator.num_pages) %}
+                <li class="page-item">
+                    <a href="{{ SITEURL }}/{{ articles_paginator.page(i + 1).url }}"
+                            {% if articles_page.number == i + 1 %} class="page-link active" aria-current="page"
+                            {% else %} class="page-link"
+                            {% endif %}>
+                        {{ i + 1 }}
+                    </a>
+                </li>
+            {% endfor %}
+
+            {% if articles_page.has_next() %}
+                <li class="page-item">
+                    <a href="{{ SITEURL }}/{{ articles_next_page.url }}" class="page-link">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a href="#" class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
 {% endif %}

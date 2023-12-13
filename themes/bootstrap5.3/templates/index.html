@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
     {% block content_title %}
-        <h2 class="text-success">Hello World &#128516</h2>
+        <h2 class="text-success col-md-3" id="index-title">Hello World &#128516</h2>
     {% endblock %}
     {% for article in articles_page.object_list %}
-        <article class="card m-2 border-success">
+        <article class="card my-2 border-success">
             <header class="card-header text-center">
                 <h2>
                     <a href="{{ SITEURL }}/{{ article.url }}"
@@ -21,7 +21,8 @@
                 </p>
                 <address>By
                     {% for author in article.authors %}
-                        <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                        <a href="{{ SITEURL }}/{{ author.url }}" class="link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">{{ author }}</a>
                     {% endfor %}
                 </address>
             </footer>

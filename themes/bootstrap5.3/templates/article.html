@@ -80,20 +80,24 @@
             {% if article.authors %}
                 <address>
                     By {% for author in article.authors %}
-                    <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+                    <a href="{{ SITEURL }}/{{ author.url }}" class="link-offset-2 link-offset-3-hover link-underline
+                    link-underline-opacity-0 link-underline-opacity-75-hover">{{ author }}</a>
                 {% endfor %}
                 </address>
             {% endif %}
             {% if article.category %}
                 <p>
-                    Category: <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
+                    Category: <a href="{{ SITEURL }}/{{ article.category.url }}" class="link-offset-2
+                    link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    {{ article.category }}</a>
                 </p>
             {% endif %}
             {% if article.tags %}
                 <p>
                     Tags:
                     {% for tag in article.tags %}
-                        <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+                        <a href="{{ SITEURL }}/{{ tag.url }}" class="link-offset-2 link-offset-3-hover link-underline
+                         link-underline-opacity-0 link-underline-opacity-75-hover">{{ tag }}</a>
                     {% endfor %}
                 </p>
             {% endif %}

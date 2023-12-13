@@ -12,6 +12,7 @@
             <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
             <!-- add bootstrap5.3 -->
             <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/bootstrap.min.css"/>
+            <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/bootstrap-icons.min.css"/>
             {% if STYLESHEET_URL %}
                 <link rel="stylesheet" type="text/css" href="{{ STYLESHEET_URL }}"/>
             {% endif %}
@@ -76,12 +77,13 @@
                             <p>{{ SITESUBTITLE }}</p>
                         {% endif %}
                     </hgroup>
-                    <nav class="nav nav-pills col justify-content-end">
+                    <nav class="nav nav-underline col justify-content-end">
                         {% for title, link in MENUITEMS %}
                             <li class="nav-item">
                                 <a href="{{ link }}"
                                         {% if output_file==link[1:] %} class="nav-link active"
-                                        {% else %} class="nav-link"{% endif %} >{{ title }}</a>
+                                        {% else %} class="nav-link"{% endif %}>
+                                    {{ title }}</a>
                             </li>
                         {% endfor %}
                         {% if DISPLAY_PAGES_ON_MENU %}
@@ -110,10 +112,26 @@
                 {% block content %}
                 {% endblock %}
             </main>
-            <footer class="p-2">
+            <footer class="py-4">
+                <div class="pb-2">
+                    {% for title, link in SOCIAL %}
+                        <a href="{{ link }}" rel="nofollow" class="btn btn-primary">
+                            <i class="bi bi-{{ title }}"></i>
+                        </a>
+                    {% endfor %}
+                </div>
                 <address>
-                    Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>,
-                    which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                    Proudly powered by <a rel="nofollow" href="https://getpelican.com/"
+                        class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0
+                        link-underline-opacity-75-hover">Pelican</a>,
+                    which takes great advantage of
+                    {% set html_links = [] %}
+                    {% for title, link in LINKS %}
+                        {% do html_links.append('<a href="{}" rel="nofollow" class="link-offset-2 link-offset-3-hover
+                        link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                        {}</a>'.format(link, title)) %}
+                    {% endfor %}
+                    {{ ', '.join(html_links) }}.
                 </address>
             </footer>
         </div>
