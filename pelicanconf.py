@@ -1,5 +1,5 @@
 AUTHOR = 'shukri azmi'
-SITENAME = 'Buku Catatan'
+SITENAME = 'Shukri Azmi'
 SITEURL = ""
 
 PATH = "content"
@@ -15,7 +15,7 @@ STYLESHEET_URL = f"{SITEURL}/theme/css/style.css"
 MENUITEMS = (('Archives', '/archives.html'), ('About', '/about.html'), )
 DISPLAY_CATEGORIES_ON_MENU = False
 LOAD_CONTENT_CACHE = False
-DEFAULT_PAGINATION = 2
+DEFAULT_PAGINATION = 6
 
 # custom page generated with a jinja2 template
 TEMPLATE_PAGES = {"about.html": "about.html"}

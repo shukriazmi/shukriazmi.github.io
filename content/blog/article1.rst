@@ -1,5 +1,5 @@
-First article
-#############
+reStructuredText
+################
 
 :date: 2023-12-08 15:02
 :modified: 2023-12-08 15:03
@@ -7,10 +7,22 @@ First article
 :tags: rst
 :slug: my-first-rst
 :authors: Shukri Azmi
-:summary: This article using format reStructuredText.
+:summary: | This article using format reStructuredText.
+ | reStructuredText developed by David Goodger.
+ | Initial release in June 2001.
 
-This will be turned into :abbr:`HTML (HyperText Markup Language)`.
 
-See below intra-site link examples in reStructuredText format.
+What is reStructuredText ?
+""""""""""""""""""""""""""
+- It is a markup language.
 
-* `a link relative to the other article <{filename}/blog/article2.md>`_
+Who use reStructuredText ?
+""""""""""""""""""""""""""
+- Anyone who want to add formatting elements to a plain text.
+- Anyone who want to do inline programming documentation (such as Python docstrings).
+
+Where to learn reStructuredText for free ?
+""""""""""""""""""""""""""""""""""""""""""
+- Visit `David Goodger`_.
+
+.. _David Goodger: https://docutils.sourceforge.io/docs/ref/rst/introduction.html
