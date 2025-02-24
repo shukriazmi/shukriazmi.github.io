@@ -12,7 +12,7 @@ DEFAULT_LANG = 'en'
 
 THEME = "themes/bootstrap5.3"
 STYLESHEET_URL = f"{SITEURL}/theme/css/style.css"
-MENUITEMS = (('Archives', '/archives.html'), ('About', '/about.html'), )
+MENUITEMS = (('Blog', '/index.html'), ('Archives', '/archives.html'), ('About', '/about.html'), )
 DISPLAY_CATEGORIES_ON_MENU = False
 LOAD_CONTENT_CACHE = False
 DEFAULT_PAGINATION = 6

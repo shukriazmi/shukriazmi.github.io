@@ -4,32 +4,34 @@
     <h2 class="text-success col-md-3" id="index-title">Hello World &#128516</h2>
 {% endblock %}
 
-<div class="card p-3 my-2">
-    <div class="row row-cols-3 g-4">
+<div id="intro">
+    <p>I'm Shukri Azmi, a python developer.</p>
+</div>
+
+
+<div class="d-md-flex justify-content-center">
+    <div id="my_articles_list" class="col-md-8">
         {% for article in articles_page.object_list %}
+        <div class="row align-items-end">
             <div class="col">
-                <div class="card border-primary h-100">
-                    <div class="card-header text-center">
-                        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
-                           class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0
-                                  link-underline-opacity-75-hover stretched-link"
-                           title="Permalink to {{ article.title|striptags }}">
-                            {{ article.title }}
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        {{ article.summary | safe }}
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        <span class="badge rounded-pill text-bg-primary">
-                            <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>
-                        </span>
-                    </div>
-                </div>
+                <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+                   class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0
+                              link-underline-opacity-75-hover fs-5"
+                   title="Permalink to {{ article.title|striptags }}">
+                    {{ article.title }}
+                </a>
             </div>
+            <div class="col text-end d-none d-md-inline">
+                <time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>
+            </div>
+            <div class="col text-end d-md-none">
+                <time datetime="{{ article.date.isoformat() }}"> {{ article.date.year }}</time>
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>
+
 {% if articles_page.has_other_pages() %}
     {% include 'pagination.html' %}
 {% endif %}
