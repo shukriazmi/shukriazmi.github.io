@@ -62,70 +62,50 @@
     </head>
 
     <body>
-        <div class="col-lg-8 mx-auto p-4 py-md-5">
-            <header class="bg-primary">
-                <div class="d-flex align-items-center mb-3">
-<!--                    <hgroup class="col-auto">-->
-<!--                        <h1>-->
-<!--                            <a href="{{ SITEURL }}/"-->
-<!--                                    class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0-->
-<!--                                      link-underline-opacity-75-hover">-->
-<!--                                {{ SITENAME }}-->
-<!--                            </a>-->
-<!--                        </h1>-->
-<!--                        {% if SITESUBTITLE %}-->
-<!--                            <p>{{ SITESUBTITLE }}</p>-->
-<!--                        {% endif %}-->
-<!--                    </hgroup>-->
-                    <nav class="nav nav-underline col justify-content-end px-2">
+        <div class="col-lg-8 mx-auto">
+            <header class="bg-primary mb-3">
+                <nav class="nav nav-underline col justify-content-end px-2">
 
-                        {% for title, link in MENUITEMS %}
-                            {% if output_file==link[1:] %}
-                                {% set nav_active="nav-link active" %}
-                            {% else %}
-                                {% set nav_active="nav-link" %}
-                            {% endif %}
+                    {% for title, link in MENUITEMS %}
+                        {% if output_file==link[1:] %}
+                            {% set nav_active="nav-link active" %}
+                        {% else %}
+                            {% set nav_active="nav-link" %}
+                        {% endif %}
 
+                        <li class="nav-item">
+                            <a href="{{ link }}" class="{{nav_active}}">{{ title }}</a>
+                        </li>
+                    {% endfor %}
+
+                    {% if DISPLAY_PAGES_ON_MENU %}
+                        {% for p in pages %}
                             <li class="nav-item">
-                                <a href="{{ link }}" class="{{nav_active}}">{{ title }}</a>
+                                <a href="{{ SITEURL }}/{{ p.url }}"
+                                   {% if p==page %} class="nav-link active" aria-current="page"
+                                   {% else %} class="nav-link" {% endif %}>{{ p.title }}</a>
                             </li>
                         {% endfor %}
+                    {% endif %}
 
-                        {% if DISPLAY_PAGES_ON_MENU %}
-                            {% for p in pages %}
-                                <li class="nav-item">
-                                    <a href="{{ SITEURL }}/{{ p.url }}"
-                                            {% if p==page %} class="nav-link active" aria-current="page"
-                                            {% else %} class="nav-link"{% endif %}>{{ p.title }}</a>
-                                </li>
-                            {% endfor %}
-                        {% endif %}
-                        {% if DISPLAY_CATEGORIES_ON_MENU %}
-                            {% for cat, null in categories %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ SITEURL }}/{{ cat.url }}" {% if cat==category %}
-                                        aria-current="page" {% endif %}>
-                                        {{ cat }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        {% endif %}
-                    </nav>
-                </div>
+                    {% if DISPLAY_CATEGORIES_ON_MENU %}
+                        {% for cat, null in categories %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ SITEURL }}/{{ cat.url }}" {% if cat==category %}
+                                   aria-current="page" {% endif %}>
+                                    {{ cat }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </nav>
             </header>
             <main>
                 {% block content %}
                 {% endblock %}
             </main>
-            <footer class="py-4">
-                <div class="pb-2">
-                    {% for title, link in SOCIAL %}
-                        <a href="{{ link }}" rel="nofollow" class="btn btn-primary">
-                            <i class="bi bi-{{ title }}"></i>
-                        </a>
-                    {% endfor %}
-                </div>
-                <address>
+            <footer class="d-md-flex gap-2 align-items-baseline py-3 justify-content-end">
+                <div>
                     Proudly powered by <a rel="nofollow" href="https://getpelican.com/"
                         class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0
                         link-underline-opacity-75-hover">Pelican</a>,
@@ -137,7 +117,12 @@
                         {}</a>'.format(link, title)) %}
                     {% endfor %}
                     {{ ', '.join(html_links) }}.
-                </address>
+                </div>
+                {% for title, link in SOCIAL %}
+                    <a href="{{ link }}" rel="nofollow" class="btn btn-primary">
+                        <i class="bi bi-{{ title }}"></i>
+                    </a>
+                {% endfor %}
             </footer>
         </div>
     <script src="{{ SITEURL }}/theme/js/bootstrap.bundle.min.js"></script>

@@ -9,10 +9,10 @@
 </div>
 
 
-<div class="d-md-flex justify-content-center">
+<div class="d-md-flex justify-content-center mb-3">
     <div id="my_articles_list" class="col-md-8">
         {% for article in articles_page.object_list %}
-        <div class="row align-items-end">
+        <div class="d-md-flex align-items-end border-bottom border-2 mb-2">
             <div class="col">
                 <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
                    class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0

@@ -1,3 +1,7 @@
+body {
+    padding: 1rem;
+}
+
 div #about-body {
     border-radius: 5px;
     position: relative;
